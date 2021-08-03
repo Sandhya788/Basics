@@ -1,0 +1,130 @@
+{% extends 'app/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  {% if user.role == 2 %}
+  <div class="row mx-3 mt-3">
+    <div class="col-md-7">
+      <h3>Carousel</h3>
+    </div>
+    <div class="col-md mx-2">
+      <h3>Items List</h3>
+    </div>
+  </div>
+
+  <div class="row mx-2">
+    {% for x in c %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg my-2">
+        <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:25px">{{x.rname}}</span>
+            <span style="font-size: 20px;float:right">{{x.address}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>Items: {{x.nitems}}</h6>
+            </div>
+            <div class="col">
+              <h6>Timings: {{x.timings}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% elif user.is_superuser %}
+  <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+    <h3>You are Admin</h3>
+  </div>
+  {% elif user.role == 3 %}
+  <div class="row mx-2">
+    {% for x in y %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg my-2 h-80">
+        <img src="{{x.rsimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:15px">{{x.rname}}</span>
+            <span style="font-size: 20px;float:right">{{x.address}}</span></td>
+          </tr>
+          <!-- <div class="row">
+            <div class="col"> -->
+              <h6>Items: {{x.nitems}}</h6>
+            <!-- </div> -->
+            <!-- <div class="col"> -->
+              <h6>Timings: {{x.timings}}</h6>
+            <!-- </div>
+            <div class="col"> -->
+              <a href="#" class="btn btn-outline-warning my-2">Check Items</a>
+            <!-- </div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="container-fluid mx-auto mt-4">
+  <div class="row mx-auto">
+    <!-- filter -->
+    <div class="col-lg-3">
+      <div class="list-group">
+        <a href="/" class="list-group-item list-group-item-action">All Products</a>
+        {% for j in a %}
+        <a href="/?category={{j.id}}" class="list-group-item list-group-item-action">{{j.rname}}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- all products -->
+    <div id="i" class="col-lg-9">
+      <div class="row">
+    {% for x in i %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg mx-auto mb-3">
+        <img src="{{x.imimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:12px">{{x.iname}}</span>
+            <span style="font-size: 12px;float:right">{{x.icategory}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>price: {{x.iprice}}</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h6>Timings: {{x.itavailability}}</h6>
+            </div>
+          </div>
+          <!-- <div class="row"> -->
+            <form method="post" action="/">
+              {% csrf_token %}
+              <input hidden type="text" name="x" value="{{x.id}}" class="mx-auto">
+              <!-- <div class="col"> -->
+              <!-- <input type="submit" value="Add To Cart" class=" float-right btn btn-light border btn-sm my-2"> -->
+              <a href="{% url 'fo' %}" class="btn btn-outline-secondary float-right btn-sm">Add to Cart</a>
+            <!-- </div> -->
+            </form>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+    </div>
+  </div>
+</div>
+  {% elif user.role == 1 %}
+  <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+    <h3>You are in Guest Account</h3>
+  </div>
+  {% else %}
+  <div class="jumbotron col-md-6 mx-auto shadow-lg mt-4">
+    <h3>Welcome to Restaurant Home Page</h3>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

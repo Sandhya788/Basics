@@ -1,0 +1,65 @@
+{% extends 'files/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row mx-3 mt-3">
+    <div class="col-md-7">
+      <h3>Carousel</h3>
+    </div>
+    <div class="col-md mx-2">
+      <h3>Items List</h3>
+    </div>
+  </div>
+
+  <div class="row mx-2">
+    {% for x in c %}
+    <div class="col col-md-3">
+      <div class="card shadow-lg my-2">
+        <img src="{{x.frimg.url}}" class="card-img-top" height="120px">
+        <div class="card-body">
+          <tr>
+            <td><span class="badge badge-info" style="font-size:25px">{{x.fname}}</span>
+            <span style="font-size: 20px;float:right">{{x.address}}</span></td>
+          </tr>
+          <div class="row">
+            <div class="col">
+              <h6>Items: {{x.nitems}}</h6>
+            </div>
+            <div class="col">
+              <h6>Timings: {{x.timings}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  {% for p in pr %}
+  <div class="card shadow-lg my-2" style="width:18rem;">
+    <img src="{{p.pimage.url}}" class="card-img-top" height="120px">
+    <div>
+      <table>
+          <tr>
+            <td>{{p.pname}}</td>
+           <!--  <td> : {{p.category.name}}</td> -->
+            <td><b>{{p.price}}</b></td>
+          </tr>
+        </table>
+        <a href="#" class="btn btn-outline-success my-2 mx-2">Add To Cart</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- {% for p in pr %}
+      <table>
+          <tr>
+            <td>{{p.pname}}</td>
+            <td> : {{p.category.name}}</td>
+            <td> : {{p.price}}</td>
+            <td> : {{p.pimage}}</td>
+          </tr>
+        </table>
+{% endfor %} -->
+{% endblock %}

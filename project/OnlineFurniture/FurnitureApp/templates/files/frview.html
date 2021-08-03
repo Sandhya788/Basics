@@ -1,0 +1,38 @@
+{% extends 'files/main.html' %}
+{% load static %}
+{% block title %}Furniture View {% endblock %}
+{% block content %}
+<div class="container mt-4">
+	<div class="card col-md-8 mx-auto shadow-lg">
+		<div class="card-body">
+			<h3>Furniture View</h3>
+			<div class="row">
+				<div class="col-sm">
+					<img src="{{z.frimg.url}}" height="180px" width="100%">
+				</div>
+				<div class="col">
+					<table class="table table-borderless">
+				<tr>
+					<th>Furniture Name</th>
+					<td>{{z.fname}}</td>
+				</tr>
+				<tr>
+					<th>Items Available</th>
+					<td>{{z.nitems}}</td>
+				</tr>
+				<tr>
+					<th>Timings</th>
+					<td>{{z.timings}}</td>
+				</tr>
+				<tr>
+					<th>Address</th>
+					<td>{{z.address}}</td>
+				</tr>
+			</table>
+				</div>
+			</div>
+			<a href="{% url 'frlist' %}" class="btn btn-block btn-outline-info my-2">Back to List</a>
+		</div>
+	</div>
+</div>
+{% endblock %} 
